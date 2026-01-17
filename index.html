@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generic School RP</title>
+
+<style>
+/* =====================
+   ROOT + THEME
+===================== */
+:root{
+  --bg-dark: linear-gradient(135deg,#0b1220,#111827,#020617);
+  --bg-light: linear-gradient(135deg,#f8fafc,#e5e7eb,#f1f5f9);
+  --glass-dark: rgba(255,255,255,.12);
+  --glass-light: rgba(255,255,255,.65);
+  --text-dark: #e5e7eb;
+  --text-light: #020617;
+  --accent: #7dd3fc;
+}
+
+body.light{
+  background: var(--bg-light);
+  color: var(--text-light);
+}
+
+body.dark{
+  background: var(--bg-dark);
+  color: var(--text-dark);
+}
+
+*{
+  box-sizing:border-box;
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",sans-serif;
+}
+
+body{
+  margin:0;
+  min-height:100vh;
+  overflow-x:hidden;
+  transition:background .5s,color .5s;
+}
+
+/* =====================
+   GLASS iOS 26
+===================== */
+.glass{
+  background: var(--glass-dark);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border:1px solid rgba(255,255,255,.25);
+  border-radius:26px;
+  box-shadow:0 20px 60px rgba(0,0,0,.35);
+}
+
+body.light .glass{
+  background: var(--glass-light);
+  border:1px solid rgba(255,255,255,.8);
+}
+
+/* =====================
+   NAVBAR
+===================== */
+nav{
+  position:fixed;
+  top:12px;
+  left:50%;
+  transform:translateX(-50%);
+  width:95%;
+  padding:14px 24px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  z-index:20;
+}
+
+nav ul{
+  list-style:none;
+  display:flex;
+  gap:18px;
+  padding:0;
+  margin:0;
+}
+
+nav a{
+  text-decoration:none;
+  color:inherit;
+  opacity:.85;
+}
+
+.logo{
+  font-weight:700;
+}
+.logo span{color:var(--accent)}
+
+/* =====================
+   TOGGLES
+===================== */
+.controls{
+  display:flex;
+  gap:10px;
+}
+
+button{
+  border:none;
+  padding:8px 14px;
+  border-radius:999px;
+  cursor:pointer;
+  background:rgba(255,255,255,.2);
+  color:inherit;
+}
+
+/* =====================
+   HERO + PARALLAX
+===================== */
+.hero{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  overflow:hidden;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:-20%;
+  background:
+    radial-gradient(circle at 30% 30%,#38bdf8,transparent 40%),
+    radial-gradient(circle at 70% 70%,#818cf8,transparent 45%);
+  opacity:.25;
+  transform:translateY(var(--parallax));
+}
+
+.hero-card{
+  padding:50px;
+  text-align:center;
+  max-width:600px;
+}
+
+.hero h1{
+  font-size:3em;
+  margin:0;
+}
+
+/* =====================
+   SECTIONS
+===================== */
+.section{
+  padding:120px 8%;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:22px;
+}
+
+.card{
+  padding:22px;
+  transition:transform .3s;
+}
+.card:hover{
+  transform:translateY(-8px) scale(1.03);
+}
+
+/* =====================
+   CHARACTERS
+===================== */
+.char-card{
+  cursor:pointer;
+}
+
+.search{
+  width:100%;
+  padding:12px;
+  border-radius:16px;
+  border:none;
+  margin-bottom:30px;
+}
+
+/* =====================
+   CHARACTER PAGE
+===================== */
+.character-page{
+  max-width:800px;
+  margin:120px auto;
+  padding:40px;
+}
+
+.back{
+  display:inline-block;
+  margin-bottom:20px;
+  opacity:.7;
+  cursor:pointer;
+}
+
+/* =====================
+   FOOTER
+===================== */
+footer{
+  margin:60px 8%;
+  padding:20px;
+  text-align:center;
+  opacity:.7;
+}
+
+/* =====================
+   HIDDEN
+===================== */
+.hidden{display:none}
+.disclaimer{
+  margin:40px 8%;
+  padding:20px;
+  font-size:0.9em;
+  opacity:.75;
+}
+</style>
+</head>
+
+<body class="dark">
+
+<!-- NAV -->
+<nav class="glass">
+  <div class="logo">Generic<span>School</span></div>
+  <ul>
+    <li><a href="#home">Home</a></li>
+    <li><a href="#team">Team</a></li>
+    <li><a href="#characters">Characters</a></li>
+  </ul>
+  <div class="controls">
+    <button id="themeBtn">🌗</button>
+    <button id="soundBtn">🔊</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="home" class="hero">
+  <div class="glass hero-card">
+    <h1>Generic School</h1>
+    <p>Minecraft Roleplay dengan lore gelap, karakter kompleks, dan drama sekolah.</p>
+    <button onclick="location.hash='#characters'">Explore</button>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section id="team" class="section">
+  <h2>GenericSchool Team</h2>
+  <div class="grid">
+    <div class="glass card">
+      <h3>Produsen</h3>
+      <ul>
+        <li>Dexer</li><li>Gesan</li><li>Rezki</li><li>Sifa</li>
+      </ul>
+    </div>
+    <div class="glass card">
+      <h3>Builder</h3>
+      <ul><li>Sifa</li><li>Asterz</li><li>-</li><li>-</li></ul>
+    </div>
+    <div class="glass card">
+      <h3>Desainer</h3>
+      <ul><li>Nao</li><li>Sifa</li></ul>
+    </div>
+    <div class="glass card">
+      <h3>Writer</h3>
+      <ul><li>Bimbim</li><li>Sifa</li><li>Dexer</li></ul>
+    </div>
+  </div>
+</section>
+
+<!-- CHARACTERS -->
+<section id="characters" class="section">
+  <h2>Karakter</h2>
+  <input class="search" placeholder="Cari karakter..." oninput="searchChar(this.value)">
+  <div class="grid" id="charGrid"></div>
+</section>
+
+<!-- CHARACTER PAGE -->
+<div id="characterPage" class="character-page glass hidden"></div>
+
+<footer class="glass">
+  © Generic School RP
+</footer>
+
+<!-- AUDIO -->
+<audio id="ambience" loop>
+  <source src="https://cdn.pixabay.com/audio/2022/10/30/audio_9c1a2bdf39.mp3">
+</audio>
+
+<script>
+/* =====================
+   DATA
+===================== */
+const characters=[
+{name:"Kenzi",story:"Murid termuda dengan masa lalu keluarga yang hancur.",extra:"Trauma: kepercayaan & keluarga"},
+{name:"Sainz",story:"Intelektual dingin akibat pola asuh buruk.",extra:"Trauma: bad parenting"},
+{name:"Gazel",story:"Pendiam, setia, ingin membalas kebaikan Dexie.",extra:"Sifat: introvert, wibu"},
+{name:"Pak Sigma",story:"Guru asik penuh rahasia.",extra:"Trauma: pendidikan keras"},
+{name:"Eris",story:"Bermuka dua, perencana ulung.",extra:"Hobi: masak, roleplay"},
+{name:"Bluud",story:"Lucu, kreatif, baik hati.",extra:"Personality: dongo positif"},
+{name:"Beatrix",story:"Korban bully dengan luka masa lalu.",extra:"Introvert, pemarah"},
+{name:"Dexie",story:"Pengamat misterius.",extra:"Trauma: dirahasiakan"},
+{name:"Noah",story:"Kepribadian ganda berbahaya.",extra:"Status: high risk"},
+{name:"Renren",story:"Periang tapi dihantui masa lalu.",extra:"Perfeksionis"},
+{name:"Mobbfi",story:"Makhluk netral misterius.",extra:"Boss vibe"},
+{name:"Chelz",story:"Karakter dengan peran belum terbuka.",extra:"Unknown"}
+];
+
+/* =====================
+   RENDER LIST
+===================== */
+const grid=document.getElementById("charGrid");
+function render(list){
+  grid.innerHTML="";
+  list.forEach(c=>{
+    const d=document.createElement("div");
+    d.className="glass card char-card";
+    d.innerHTML=`<h3>${c.name}</h3><p>${c.story}</p>`;
+    d.onclick=()=>location.hash="character/"+c.name;
+    grid.appendChild(d);
+  });
+}
+render(characters);
+
+/* =====================
+   SEARCH
+===================== */
+function searchChar(q){
+  q=q.toLowerCase();
+  render(characters.filter(c=>c.name.toLowerCase().includes(q)));
+}
+
+/* =====================
+   ROUTER
+===================== */
+const page=document.getElementById("characterPage");
+window.onhashchange=router;
+function router(){
+  const h=location.hash;
+  page.classList.add("hidden");
+  document.querySelectorAll("section").forEach(s=>s.style.display="block");
+
+  if(h.startsWith("#character/")){
+    const name=h.split("/")[1];
+    const c=characters.find(x=>x.name===name);
+    if(!c) return;
+    document.querySelectorAll("section").forEach(s=>s.style.display="none");
+    page.innerHTML=`
+      <div class="back" onclick="history.back()">← Back</div>
+      <h2>${c.name}</h2>
+      <p>${c.story}</p>
+      <p><i>${c.extra}</i></p>
+    `;
+    page.classList.remove("hidden");
+  }
+}
+router();
+
+/* =====================
+   THEME TOGGLE
+===================== */
+const themeBtn=document.getElementById("themeBtn");
+let theme=localStorage.theme||"dark";
+document.body.className=theme;
+
+themeBtn.onclick=()=>{
+  theme=document.body.classList.contains("dark")?"light":"dark";
+  document.body.className=theme;
+  localStorage.theme=theme;
+};
+
+/* =====================
+   SOUND
+===================== */
+const audio=document.getElementById("ambience");
+let sound=false;
+document.getElementById("soundBtn").onclick=()=>{
+  sound=!sound;
+  sound?audio.play():audio.pause();
+};
+
+/* =====================
+   PARALLAX
+===================== */
+window.addEventListener("scroll",()=>{
+  document.documentElement.style.setProperty(
+    "--parallax", window.scrollY * 0.15 + "px"
+  );
+});
+</script>
+</body>
+</html>
+<!-- DISCLAIMER -->
+<div class="glass disclaimer">
+  <h4>Disclaimer</h4>
+  <p>
+    Website ini merupakan proyek <b>Roleplay fiksi</b>.
+    Seluruh nama yang tercantum adalah <b>nama panggilan / alias</b>
+    dan tidak merepresentasikan identitas asli atau kehidupan nyata.
+  </p>
+</div>
+
+<footer class="glass">
+  © Generic School RP
+</footer>
